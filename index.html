@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DJ Man Kaps - Official Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #55f8f0;
+            --secondary-color: #4feb57;
+            --accent-color: #a83ef5;
+            --dark-color: #1a1a1a;
+            --light-color: #ffffff;
+            --nav-bg: #cfcccc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        nav {
+            background-color: var(--nav-bg);
+            text-align: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        a {
+            text-align: center;
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover, a.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .dj-name {
+            background: linear-gradient(135deg, var(--accent-color), #6e48aa);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dj-name::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.3) 0%,
+                rgba(255,255,255,0) 60%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            animation: bounceIn 1s;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .latest-release {
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: fadeInUp 1s;
+        }
+        
+        .latest-release h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .visualizer {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 5px;
+            margin: 30px 0;
+        }
+        
+        .bar {
+            width: 8px;
+            background: linear-gradient(to top, var(--accent-color), var(--primary-color));
+            border-radius: 5px 5px 0 0;
+            animation: equalize 1.5s infinite ease-in-out;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        .upcoming-events {
+            width: 100%;
+            padding: 30px 20px;
+            background-color: rgba(255,255,255,0.8);
+            margin-top: 40px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .event-date {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .event-info {
+            padding: 15px;
+        }
+        
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .event-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .event-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .event-btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+        
+        @keyframes equalize {
+            0%, 100% { height: 10%; }
+            25% { height: 60%; }
+            50% { height: 30%; }
+            75% { height: 80%; }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px 0;
+            }
+            
+            a {
+                margin: 0 8px;
+                font-size: 0.9rem;
+                padding: 5px 10px;
+            }
+            
+            .dj-name {
+                font-size: 1.5rem;
+                padding: 10px 20px;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            a {
+                margin: 0 5px;
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+            
+            .dj-name {
+                font-size: 1.2rem;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="music.html"><i class="fas fa-music"></i> Music</a>
+        <a href="reels.html"><i class="fas fa-video"></i> Reels</a>
+    </nav>
+    
+    <div class="hero">
+        <p class="welcome-text animate__animated animate__fadeIn">Welcome to the Official Website of</p>
+        <div class="dj-name animate__animated animate__pulse">
+            DJ Man Kaps
+        </div>
+        
+        <img src="images/whatsapp-icon.jpeg" alt="DJ Man Kaps" class="profile-img">
+        
+        <!-- Audio Visualizer -->
+        <div class="visualizer">
+            <div class="bar" style="--i: 0;"></div>
+            <div class="bar" style="--i: 1;"></div>
+            <div class="bar" style="--i: 2;"></div>
+            <div class="bar" style="--i: 3;"></div>
+            <div class="bar" style="--i: 4;"></div>
+            <div class="bar" style="--i: 5;"></div>
+            <div class="bar" style="--i: 6;"></div>
+            <div class="bar" style="--i: 7;"></div>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-soundcloud"></i></a>
+        </div>
+        
+        <!-- Latest Release -->
+        <div class="latest-release">
+            <h3>Latest Release</h3>
+            <p>Abashwe Nakwerrrrr 2.0</p>
+            <div class="player-controls">
+                <button class="control-btn"><i class="fas fa-play"></i></button>
+                <audio id="preview-audio" src="audios/current-music/Abashwe Nakwerrrrr 2.0.mp3"></audio>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upcoming Events -->
+    <div class="upcoming-events">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="events-grid">
+            <div class="event-card">
+                <div class="event-date">JUL 15, 2023</div>
+                <div class="event-info">
+                    <h3 class="event-title">Summer Beats Festival</h3>
+                    <p class="event-location">Johannesburg, SA</p>
+                    <a href="#" class="event-btn">Get Tickets</a>
+                </div>
+            </div>
+            
+            <div class="event-card">
+                <div class="event-date">AUG 5, 2023</div>
+                <div class="event-info">
+                    <h3 class="event-title">Club Night Special</h3>
+                    <p class="event-location">Pretoria, SA</p>
+                    <a href="#" class="event-btn">Get Tickets</a>
+                </div>
+            </div>
+            
+            <div class="event-card">
+                <div class="event-date">SEP 12, 2023</div>
+                <div class="event-info">
+                    <h3 class="event-title">DJ Man Kaps Tour</h3>
+                    <p class="event-location">Cape Town, SA</p>
+                    <a href="#" class="event-btn">Get Tickets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">Bookings</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+        </div>
+        <p class="copyright">© 2023 DJ Man Kaps. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        // Play preview audio
+        const playBtn = document.querySelector('.control-btn');
+        const previewAudio = document.getElementById('preview-audio');
+        const bars = document.querySelectorAll('.bar');
+        
+        playBtn.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            
+            if (previewAudio.paused) {
+                previewAudio.play();
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                animateBars();
+            } else {
+                previewAudio.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                stopBars();
+            }
+        });
+        
+        // Audio visualizer animation
+        function animateBars() {
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'running';
+            });
+        }
+        
+        function stopBars() {
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'paused';
+                bar.style.height = '10%';
+            });
+        }
+        
+        // Randomize bar heights periodically
+        setInterval(() => {
+            if (!previewAudio.paused) {
+                bars.forEach(bar => {
+                    const randomHeight = Math.random() * 80 + 20;
+                    bar.style.height = `${randomHeight}%`;
+                });
+            }
+        }, 300);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.event-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
